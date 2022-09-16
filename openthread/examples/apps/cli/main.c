@@ -80,7 +80,6 @@
 
 extern void otAppCliInit(otInstance *aInstance);
 static void setNetworkConfiguration(otInstance *aInstance);
-//static const char UDP_DEST_ADDR[] = "fde8:b952:255b:0:dea6:32ff:fe0d:b3f4";
 static const char UDP_DEST_ADDR[] = "fd11:1111:1122:2222:dea6:32ff:fe0d:b3f4";
 
 
@@ -96,7 +95,7 @@ void handleUdpReceive(void *aContext, otMessage *aMessage, const otMessageInfo *
 void delay(int number_of_seconds);
 unsigned sleep (unsigned int __seconds);
 void waitFor(unsigned int secs);
-//void sleep(int number_of_seconds);
+
 
 static otUdpSocket sUdpSocket;
 
@@ -199,7 +198,7 @@ void setNetworkConfiguration(otInstance *aInstance)
     
     
 }
-//add otInstance *aInstance into this function for udp sending
+
 void handleButtonInterrupt(otInstance *aInstance)
 {
     //sendUdp(aInstance);
@@ -230,21 +229,12 @@ void initUdp(otInstance *aInstance)
 
     otUdpOpen(aInstance, &sUdpSocket, handleUdpReceive, aInstance);
     otUdpBind(aInstance, &sUdpSocket, &listenSockAddr, OT_NETIF_THREAD);
-    otThreadGetRouterUpgradeThreshold(aInstance);
-    /*otError error = otThreadBecomeRouter(aInstance);
-     if (error != OT_ERROR_NONE) {
-        otPlatLog(OPENTHREAD_CONFIG_LOG_OUTPUT_DEBUG_UART, OT_LOG_REGION_PLATFORM, "Remains Child %d\n", error); 
-     } else {
-        otPlatLog(OPENTHREAD_CONFIG_LOG_OUTPUT_DEBUG_UART, OT_LOG_REGION_PLATFORM, "Attempts to become Router %d\n", error);
-     } */     
-    
+    otThreadGetRouterUpgradeThreshold(aInstance);   
 }
 void coap_init(otInstance *aInstance)
 {
     otError error = otCoapStart(aInstance, OT_DEFAULT_COAP_PORT);
-    
-    // if (error!=OT_ERROR_NONE)
-      //NRF_LOG_INFO("Failed to start Coap");
+   
 }
 
 static void coap_send_data_request(otInstance *aInstance){
@@ -253,7 +243,6 @@ static void coap_send_data_request(otInstance *aInstance){
   otMessageInfo myMessageInfo;
   otIp6Address  destinationAddr;
   const char  * serverIpAddr = "fde8:b952:255b:0:dea6:32ff:fe0d:b3f4";
-  //const char  * serverIpAddr = "fd11:1111:1122:2222:dea6:32ff:fe0d:b3f4";
   const char * myTemperatureJson = "The weather today is 70 degrees celciuss.";
 
   
